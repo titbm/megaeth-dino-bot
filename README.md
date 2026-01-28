@@ -1,113 +1,113 @@
 # 🦖 MegaETH Dino Bot
 
-An automated Chrome extension bot for the MegaETH stress test dinosaur game at [stress.megaeth.com/egg](https://stress.megaeth.com/egg).
+Автоматизированный бот-расширение для Chrome для игры-динозавра в стресс-тесте MegaETH на [stress.megaeth.com/egg](https://stress.megaeth.com/egg).
 
-## 🎯 Features
+## 🎯 Возможности
 
-- **Intelligent Jump Mechanics**: Physics-based calculations for optimal jump timing
-- **Speed-Adaptive AI**: Different strategies for various speed ranges
-- **Visual HUD**: Real-time display with color-coded speed indicators
-- **Transaction Counter**: Tracks total jumps (transactions) per game session
-- **Easy Controls**: Simple keyboard toggle (Press 'S' to start/stop)
+- **Интеллектуальная механика прыжков**: Физические расчеты для оптимального времени прыжка
+- **Адаптивный AI**: Разные стратегии для различных диапазонов скорости
+- **Визуальный HUD**: Отображение в реальном времени с цветовой индикацией скорости
+- **Счетчик транзакций**: Отслеживание общего количества прыжков за игровую сессию
+- **Простое управление**: Переключение с клавиатуры (нажмите 'S' для старт/стоп)
 
-## 🎮 HUD Display
+## 🎮 Интерфейс (HUD)
 
-The bot features a dynamic heads-up display showing:
-- **Speed Indicator**: Current game speed
-- **TX Counter**: Number of jumps performed in current session
-- **Visual Modes** (color-coded by speed):
-  - 🐢 **Teal** (< 13): Turtle mode - Safe start
-  - 🐇 **Green** (13-22): Rabbit mode - Standard speed
-  - 🐆 **Orange** (22-24.5): Cheetah mode - High speed
-  - 🚀 **Red** (> 24.5): Rocket mode - Hyper speed
+Бот имеет динамический интерфейс, показывающий:
+- **Индикатор скорости**: Текущая скорость игры
+- **Счетчик TX**: Количество прыжков в текущей сессии
+- **Визуальные режимы** (цветовая кодировка по скорости):
+  - 🐢 **Бирюзовый** (< 13): Режим черепахи - Безопасный старт
+  - 🐇 **Зеленый** (13-22): Режим кролика - Стандартная скорость
+  - 🐆 **Оранжевый** (22-24.5): Режим гепарда - Высокая скорость
+  - 🚀 **Красный** (> 24.5): Режим ракеты - Гипер-скорость
 
-## 📦 Installation
+## 📦 Установка
 
-1. **Download the extension**:
-   - Clone this repository or download as ZIP
+1. **Скачайте расширение**:
+   - Клонируйте репозиторий или скачайте как ZIP
    ```bash
    git clone https://github.com/YOUR_USERNAME/megaeth-dino-bot.git
    ```
 
-2. **Load in Chrome**:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable "Developer mode" (top right)
-   - Click "Load unpacked"
-   - Select the `megaeth-dino-bot` folder
+2. **Загрузите в Chrome**:
+   - Откройте Chrome и перейдите на `chrome://extensions/`
+   - Включите "Режим разработчика" (Developer mode) в правом верхнем углу
+   - Нажмите "Загрузить распакованное расширение" (Load unpacked)
+   - Выберите папку `megaeth-dino-bot`
 
-3. **Navigate to the game**:
-   - Go to [https://stress.megaeth.com/egg](https://stress.megaeth.com/egg)
+3. **Перейдите в игру**:
+   - Откройте [https://stress.megaeth.com/egg](https://stress.megaeth.com/egg)
 
-## 🎯 Usage
+## 🎯 Использование
 
-1. **Start the game** on the MegaETH stress test page
-2. **Press 'S'** to activate the bot
-3. Watch the bot play automatically with real-time stats
-4. **Press 'S'** again to pause/stop the bot
+1. **Запустите игру** на странице стресс-теста MegaETH
+2. **Нажмите 'S'** для активации бота
+3. Наблюдайте за автоматической игрой с отображением статистики в реальном времени
+4. **Нажмите 'S'** снова для паузы/остановки бота
 
-## 🧠 Bot Intelligence
+## 🧠 Интеллект бота
 
-### Speed Tiers
+### Уровни скорости
 
-The bot uses different strategies based on game speed:
+Бот использует разные стратегии в зависимости от скорости игры:
 
-- **< 13 (Blind Safety)**: Conservative jumps with extended hold time
-- **13-22 (Standard)**: Linear trigger distance formula
-- **22-24.5 (Goldilocks)**: Physics-based calculation with moderate gravity (0.75)
-- **> 24.5 (Hyper-G)**: Aggressive physics with high gravity (0.9) for precise jumps
+- **< 13 (Слепая безопасность)**: Консервативные прыжки с увеличенным временем удержания
+- **13-22 (Стандарт)**: Линейная формула расстояния триггера
+- **22-24.5 (Золотая середина)**: Физический расчет с умеренной гравитацией (0.75)
+- **> 24.5 (Гипер-G)**: Агрессивная физика с высокой гравитацией (0.9) для точных прыжков
 
-### Jump Mechanics
+### Механика прыжков
 
-- **Single obstacles**: Quick, agile jumps
-- **Obstacle groups**: Higher, longer jumps with extended hold time
-- **Dynamic gravity**: Temporary gravity adjustments for optimal trajectory
-- **Physics-based timing**: Calculates trigger distance using velocity and gravity
+- **Одиночные препятствия**: Быстрые, ловкие прыжки
+- **Группы препятствий**: Более высокие и длинные прыжки с увеличенным временем удержания
+- **Динамическая гравитация**: Временные корректировки гравитации для оптимальной траектории
+- **Физический расчет времени**: Вычисление расстояния триггера на основе скорости и гравитации
 
-## 🛠️ Technical Details
+## 🛠️ Технические детали
 
-- **Manifest Version**: 3
-- **Permissions**: None required
-- **Injection**: Main world script injection for direct game access
-- **Framework**: Vanilla JavaScript
+- **Версия манифеста**: 3
+- **Разрешения**: Не требуются
+- **Инъекция**: Внедрение скрипта в основной мир для прямого доступа к игре
+- **Фреймворк**: Vanilla JavaScript
 
-## 📊 Stats Tracking
+## 📊 Отслеживание статистики
 
-- **TX Counter**: Automatically resets when a new game starts (detected by speed drop)
-- **Persistent across toggles**: Counter maintains value when bot is paused/resumed during gameplay
+- **Счетчик TX**: Автоматически сбрасывается при начале новой игры (определяется по падению скорости)
+- **Сохранение при переключении**: Счетчик сохраняет значение при паузе/возобновлении бота во время игры
 
-## 🔧 Development
+## 🔧 Разработка
 
-The bot consists of two main files:
-- `manifest.json`: Chrome extension configuration
-- `content.js`: Bot logic and UI implementation
+Бот состоит из двух основных файлов:
+- `manifest.json`: Конфигурация расширения Chrome
+- `content.js`: Логика бота и реализация интерфейса
 
-### Key Components
+### Ключевые компоненты
 
-1. **UI System**: Dynamic HUD with color-coded visual feedback
-2. **Detection Logic**: Obstacle pattern recognition and grouping
-3. **Physics Engine**: Gravity and velocity calculations
-4. **Execution System**: Precise jump timing and key management
+1. **Система UI**: Динамический HUD с цветовой визуальной обратной связью
+2. **Логика обнаружения**: Распознавание и группировка паттернов препятствий
+3. **Физический движок**: Расчеты гравитации и скорости
+4. **Система выполнения**: Точное время прыжков и управление клавишами
 
-## 📝 Version History
+## 📝 История версий
 
-- **v1.0 (v62)**: Initial release with full feature set
-  - Speed-adaptive AI
-  - Visual HUD with icons
-  - Transaction counter
-  - Multi-tier physics system
+- **v1.0 (v62)**: Первый релиз с полным набором функций
+  - Адаптивный AI по скорости
+  - Визуальный HUD с иконками
+  - Счетчик транзакций
+  - Многоуровневая физическая система
 
-## ⚠️ Disclaimer
+## ⚠️ Отказ от ответственности
 
-This bot is created for educational and testing purposes. Use responsibly and in accordance with the MegaETH stress test guidelines.
+Этот бот создан в образовательных и тестовых целях. Используйте ответственно и в соответствии с правилами стресс-теста MegaETH.
 
-## 📄 License
+## 📄 Лицензия
 
-MIT License - Feel free to modify and distribute
+MIT License - свободно модифицируйте и распространяйте
 
-## 🤝 Contributing
+## 🤝 Вклад в проект
 
-Contributions, issues, and feature requests are welcome!
+Приветствуются вклады, сообщения об ошибках и запросы функций!
 
 ---
 
-Made with 💎 for the MegaETH community
+Сделано с 💎 для сообщества MegaETH

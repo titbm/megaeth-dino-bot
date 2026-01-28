@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "MegaETH Dino Bot",
+    "version": "1.0",
+    "description": "Automated bot for MegaETH stress test game with UI controls.",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://stress.megaeth.com/egg"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "world": "MAIN"
+        }
+    ],
+    "permissions": []
+}

@@ -1,6 +1,6 @@
 // === MEGAETH BOT (MAIN WORLD) ===
 (function () {
-    console.log("🦖 MegaETH Bot: v63 (Performance Optimized)...");
+    console.log("🦖 MegaETH Bot: v64 (Extreme Low FPS Optimized)...");
 
     let isBotActive = false;
     let botFrameId = null;
@@ -149,7 +149,9 @@
                 let holdTime = 0;
 
                 if (speed < 13) {
-                    triggerDist = 75;
+                    // Extra safety margin for low FPS at start
+                    const lowFpsBonus = avgFrameTime > 30 ? 30 : 0;
+                    triggerDist = 75 + lowFpsBonus;
                     jumpForce = -15.5;
                     holdTime = 160;
                 } else {
@@ -171,12 +173,20 @@
                 }
 
                 // === EXECUTION ===
-                // Performance compensation: increase trigger distance if FPS is low
-                const fpsCompensation = avgFrameTime > 20 ? (avgFrameTime / 16.67) : 1;
+                // Performance compensation: more aggressive for extreme low FPS
+                let fpsCompensation = 1;
+                if (avgFrameTime > 20) {
+                    // Exponential compensation for very low FPS
+                    fpsCompensation = Math.pow(avgFrameTime / 16.67, 1.2);
+                    // Cap at 6x to prevent overly early jumps
+                    fpsCompensation = Math.min(fpsCompensation, 6);
+                }
+
                 const adjustedTriggerDist = triggerDist * fpsCompensation;
 
-                // Emergency jump if obstacle is dangerously close (missed trigger due to lag)
-                const emergencyDist = speed * 2 + 30;
+                // Emergency jump: larger buffer for low FPS
+                const emergencyMultiplier = avgFrameTime > 30 ? 3.5 : 2.5;
+                const emergencyDist = speed * emergencyMultiplier + 50;
                 const shouldJump = obs.xPos < adjustedTriggerDist || (obs.xPos < emergencyDist && obs.xPos > 0);
 
                 if (shouldJump) {
@@ -213,11 +223,15 @@
                         jumpCount++;
                         r.tRex.jumpVelocity = jumpForce;
 
+                        // Compensate hold time for low FPS
+                        const holdTimeCompensation = avgFrameTime > 25 ? (avgFrameTime / 16.67) : 1;
+                        const adjustedHoldTime = (holdTime + extraHold) * holdTimeCompensation;
+
                         setTimeout(() => {
                             if (r.tRex.jumping) {
                                 releaseSpace();
                             }
-                        }, holdTime + extraHold);
+                        }, adjustedHoldTime);
                     }
                 }
             }

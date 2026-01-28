@@ -1,11 +1,14 @@
 // === MEGAETH BOT (MAIN WORLD) ===
 (function () {
-    console.log("🦖 MegaETH Bot: v62 (Final)...");
+    console.log("🦖 MegaETH Bot: v63 (Performance Optimized)...");
 
     let isBotActive = false;
     let botFrameId = null;
     let jumpCount = 0;
     let lastSpeed = 0;
+    let lastJumpTime = 0;
+    let lastFrameTime = performance.now();
+    let avgFrameTime = 16.67;
 
     // === UI INITIALIZATION ===
     const ui = document.createElement('div');
@@ -44,8 +47,11 @@
             icon = '🐇';
         }
 
+        const fps = Math.round(1000 / avgFrameTime);
+        const fpsColor = fps < 50 ? '#ff6b6b' : '#aaa';
+
         Object.assign(ui.style, { background: color, borderColor: 'rgba(255,255,255,0.5)' });
-        ui.innerHTML = `${icon} SPEED: <b>${speed.toFixed(1)}</b> | TX: <b>${jumpCount}</b>`;
+        ui.innerHTML = `${icon} SPEED: <b>${speed.toFixed(1)}</b> | TX: <b>${jumpCount}</b> | <span style="color: ${fpsColor}">FPS: <b>${fps}</b></span>`;
     }
 
     // === TOGGLE HANDLER ===
@@ -75,6 +81,12 @@
     // === CORE LOGIC ===
     function botLoop() {
         if (isBotActive) botFrameId = requestAnimationFrame(botLoop);
+
+        // Performance monitoring
+        const now = performance.now();
+        const frameTime = now - lastFrameTime;
+        lastFrameTime = now;
+        avgFrameTime = avgFrameTime * 0.9 + frameTime * 0.1; // Exponential moving average
 
         if (window.Runner && Runner.instance_) {
             const r = Runner.instance_;
@@ -159,8 +171,19 @@
                 }
 
                 // === EXECUTION ===
-                if (obs.xPos < triggerDist) {
-                    if (!r.tRex.jumping && !r.tRex.ducking) {
+                // Performance compensation: increase trigger distance if FPS is low
+                const fpsCompensation = avgFrameTime > 20 ? (avgFrameTime / 16.67) : 1;
+                const adjustedTriggerDist = triggerDist * fpsCompensation;
+
+                // Emergency jump if obstacle is dangerously close (missed trigger due to lag)
+                const emergencyDist = speed * 2 + 30;
+                const shouldJump = obs.xPos < adjustedTriggerDist || (obs.xPos < emergencyDist && obs.xPos > 0);
+
+                if (shouldJump) {
+                    // Cooldown check: prevent double jumps (min 200ms between jumps)
+                    const timeSinceLastJump = now - lastJumpTime;
+                    if (!r.tRex.jumping && !r.tRex.ducking && timeSinceLastJump > 200) {
+                        lastJumpTime = now;
 
                         pressSpace();
 

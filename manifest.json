@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "MegaETH Dino Bot",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Automated bot for MegaETH stress test game with UI controls.",
     "content_scripts": [
         {
